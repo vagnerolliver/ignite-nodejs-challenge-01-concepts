@@ -120,8 +120,9 @@ app.patch('/todos/:id/done', checksExistsUserAccount, checksExistsUsersTodo, (re
 
 app.delete('/todos/:id', checksExistsUserAccount, checksExistsUsersTodo, (request, response) => {
   const { user, todo } = request
-   
-  user.todos.splice(user.todos.indexOf(todo),1);
+  
+  const todoIndex = user.todos.findIndex(item => item.id === todo.id)
+  user.todos.splice(todoIndex, 1);
 
   // user.todos = user.todos.filter(userTodo => userTodo.id !== todo.id)
 
